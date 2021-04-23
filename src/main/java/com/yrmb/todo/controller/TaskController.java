@@ -29,5 +29,4 @@ public class TaskController {
         taskService.deleteAll();
         return ResponseEntity.noContent().build();
     }
-
 }
