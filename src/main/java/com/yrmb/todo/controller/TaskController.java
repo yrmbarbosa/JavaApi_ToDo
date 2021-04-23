@@ -5,10 +5,7 @@ import com.yrmb.todo.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,9 +22,22 @@ public class TaskController {
     }
 
     @DeleteMapping
-    public ResponseEntity<Boolean> deleteAll(){
+    public ResponseEntity<Boolean> deleteAll() {
         taskService.deleteAll();
         return ResponseEntity.noContent().build();
     }
 
+    @PutMapping
+    public ResponseEntity<Boolean> update(@RequestBody Task task) {
+
+        try {
+            taskService.update(task);
+            return ResponseEntity.ok().build();
+            
+        } catch (IndexOutOfBoundsException ex) {
+            return ResponseEntity.notFound().build();
+        } catch (Exception ex) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
 }

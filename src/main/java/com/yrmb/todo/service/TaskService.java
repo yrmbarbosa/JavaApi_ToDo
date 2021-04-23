@@ -33,7 +33,13 @@ public class TaskService {
     }
 
     public void update(Task task){
-        // to-do
+
+        Task taskRemove = findById(task.getId());
+
+        if (taskRemove != null) {
+            tasks.remove(taskRemove);
+            tasks.add(task);
+        }
     }
 
     public void delete(long id){
