@@ -28,7 +28,15 @@ public class TaskService {
 
     }
 
+    public boolean validate(Task task){
+        return true;
+    }
+
     public void create(Task task){
+
+        task.setId(newId());
+        task.setCreatedDate(LocalDateTime.now());
+        task.setResolvedDate(null);
         tasks.add(task);
     }
 
@@ -56,6 +64,10 @@ public class TaskService {
 
     public Task findById(long id) {
         return tasks.stream().filter(t -> t.getId() == id).collect(Collectors.toList()).get(0);
+    }
+
+    public long newId(){
+        return tasks.size() + 1;
     }
 
 }

@@ -17,6 +17,21 @@ public class TaskController {
     @Autowired
     private TaskService taskService;
 
+    @PostMapping
+    @ResponseBody
+    public ResponseEntity<Task> create(@RequestBody Task task){
+
+        try {
+            if (taskService.validate(task)) {
+                return ResponseEntity.ok(task);
+            } else {
+                return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
+            }
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
     @GetMapping
     public ResponseEntity<List<Task>> findAll() {
 
