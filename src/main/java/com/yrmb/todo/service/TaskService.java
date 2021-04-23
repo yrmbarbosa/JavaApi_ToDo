@@ -42,7 +42,7 @@ public class TaskService {
         }
     }
 
-    public void delete(long id){
+    public void deleteById(long id){
         tasks.remove(findById((id)));
     }
 
