@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 @Service
 public class TaskService {
 
-    private ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
 
     TaskService(){
 
@@ -32,12 +32,14 @@ public class TaskService {
         return true;
     }
 
-    public void create(Task task){
+    public Task create(Task task){
 
         task.setId(newId());
         task.setCreatedDate(LocalDateTime.now());
         task.setResolvedDate(null);
         tasks.add(task);
+
+        return task;
     }
 
     public void update(Task task){

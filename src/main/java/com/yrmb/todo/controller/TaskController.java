@@ -18,12 +18,12 @@ public class TaskController {
     private TaskService taskService;
 
     @PostMapping
-    @ResponseBody
     public ResponseEntity<Task> create(@RequestBody Task task){
 
         try {
             if (taskService.validate(task)) {
-                return ResponseEntity.ok(task);
+                var createdTask = taskService.create(task);
+                return ResponseEntity.ok(createdTask);
             } else {
                 return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
             }
